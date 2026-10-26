@@ -29,7 +29,7 @@ Sin embargo, una instalación por defecto no es segura para un entorno de produc
 - Deshabilitación del inicio de sesión remoto para el usuario root, lo que obliga a que cualquier tarea de administración crítica tenga que realizarse localmente desde el propio servidor.
 - Eliminación de la base de datos "test", que suele venir por defecto y representa una superficie de ataque innecesaria.
 
-![image.png](image.png)
+![image.png](Imagenes/image.png)
 
 ### **1a.2 Habilitar autenticación y cifrado en tránsito mediante SSL/TLS**
 
