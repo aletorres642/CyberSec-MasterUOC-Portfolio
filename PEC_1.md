@@ -41,19 +41,19 @@ Para habilitar este mecanismo de forma robusta, he llevado a cabo las siguientes
 
 En primer lugar, utilizando la herramienta `OpenSSL`, he creado nuestra propia Autoridad Certificadora (CA) autofirmada, así como la clave privada y el certificado específico para el servidor de MariaDB. Para evitar accesos no autorizados a las claves privadas a nivel de sistema operativo, he restringido la propiedad de la carpeta de certificados exclusivamente al usuario del sistema `mysql`con permisos estrictos de solo lectura.
 
-![image.png](image%201.png)
+![image.png](Imagenes/image%201.png)
 
 **Fase 2: Configuración del motor**
 
 Una vez generados los certificados, es necesario indicarle a MariaDB dónde se encuentran y forzar su uso. Para ello, he editado el archivo de configuración principal del servicio (`50-server.cnf`), añadiendo las rutas bajo el bloque principal del daemon y activando la directiva `require_secure_transport = ON`. Esta variable es la que fuerza al servidor a rechazar cualquier intento de conexión de un cliente que no utilice cifrado TLS.
 
-![Captura de pantalla 2026-10-19 161113.png](Captura_de_pantalla_2026-10-19_161113.png)
+![Captura de pantalla 2026-10-19 161113.png](Imagenes/Captura_de_pantalla_2026-10-19_161113.png)
 
 **Fase 3: Verificación del cifrado**
 
 Finalmente, tras reiniciar el servicio para aplicar los cambios, he accedido a la consola de MariaDB para comprobar el estado de las variables internas. Como se observa a continuación, el motor ha cargado correctamente los certificados y la directiva `have_ssl`marca "YES", confirmando que el tráfico ya viaja cifrado.
 
-![image.png](image%202.png)
+![image.png](Imagenes/image%202.png)
 
 ### **1a.3 Implementación de control de acceso basado en roles (RBAC)**
 
@@ -84,19 +84,19 @@ Para habilitarlo y gestionar las claves de forma segura, he implementado el plug
 
 En primer lugar, hemos creado un archivo que contiene una clave de cifrado generada aleatoriamente con OpenSSL. Para evitar almacenar esta clave en texto plano, la hemos protegido cifrando el archivo con una segunda clave maestra (`keyfile.key`), garantizando así que un atacante que lea el sistema de archivos no pueda comprometer la base de datos de forma directa. Además, he restringido los permisos de la carpeta criptográfica (`/etc/mysql/encryption`) para que solo el usuario `mysql`tenga acceso.
 
-![image.png](image%204.png)
+![image.png](Imagenes/image%204.png)
 
 **Fase 2: Activación del plugin en el motor**
 
 Una vez generadas las claves, he editado el archivo de configuración principal (`50-server.cnf`) añadiendo las directivas correspondientes bajo el bloque principal. He indicado al motor que cargue el plugin, le he pasado las rutas de la clave maestra y el archivo cifrado, y he forzado a que todas las tablas y logs de InnoDB se cifren automáticamente al escribirse en disco.
 
-![image.png](image%205.png)
+![image.png](Imagenes/image%205.png)
 
 **Fase 3: Verificación del cifrado**
 
 Por último, tras reiniciar el servicio, he comprobado en la consola de MariaDB que el motor ha cargado correctamente la configuración. La variable `innodb_encrypt_tables`en estado "ON" confirma que los datos ya se están cifrando en disco.
 
-![image.png](image%206.png)
+![image.png](Imagenes/image%206.png)
 
 ### **1a.6 Auditoría de acciones de usuarios y detección de incidentes**
 
@@ -108,9 +108,9 @@ El funcionamiento y la implementación de este mecanismo se basan en los siguien
 2. **Eventos registrados:** El plugin almacena en un archivo de log específico información detallada de cada suceso, incluyendo la marca de tiempo (timestamp), el usuario que realiza la acción, la dirección IP de origen, la base de datos consultada y la sentencia SQL exacta ejecutada.
 3. **Detección de incidentes de seguridad:** Estos registros (audit logs) son fundamentales para el análisis forense y la detección temprana de amenazas (como accesos fuera de horario, escaladas de privilegios o consultas anómalas sobre tablas sensibles), permitiendo a los equipos de ciberseguridad trazar un incidente paso a paso.
 
-![image.png](image%207.png)
+![image.png](Imagenes/image%207.png)
 
-![image.png](image%208.png)
+![image.png](Imagenes/image%208.png)
 
 ### **1a.7 Restricción de acceso por direcciones IP específicas**
 
@@ -119,7 +119,7 @@ Para reducir la superficie de ataque y evitar intentos de conexión no autorizad
 1. **A nivel de red (`bind-address`):** En el archivo de configuración del servidor (`50-server.cnf`), la directiva `bind-address` determina en qué interfaces de red escucha el demonio. Si se establece en `127.0.0.1`, el servidor ignorará cualquier petición que venga de fuera de la propia máquina.
 2. **A nivel de Control de Acceso (ACLs):** El método más granular para definir una lista de IPs permitidas es a través de la propia gestión de usuarios de MariaDB. Las cuentas se definen siempre como una combinación de `usuario@host`. Al sustituir el comodín global (`%`) por una dirección IP específica al crear o renombrar un usuario, el motor bloqueará automáticamente cualquier intento de inicio de sesión de ese usuario que provenga de una IP distinta a la autorizada.
 
-![image.png](image%209.png)
+![image.png](Imagenes/image%209.png)
 
 ### **1a.8 Cifrado a nivel de columna con AES_ENCRYPT() y AES_DECRYPT()**
 
@@ -135,7 +135,7 @@ La dinámica de uso es directa en las sentencias SQL:
 
 A continuación, se demuestra esta técnica en un entorno de pruebas simulando la inserción de un diagnóstico clínico:
 
-![image.png](image%2010.png)
+![image.png](Imagenes/image%2010.png)
 
 ### **1a.9 Copias de seguridad automáticas y seguras**
 
@@ -191,7 +191,7 @@ A nivel de sistema operativo, la arquitectura del despliegue en Ubuntu Server di
 - **Directorio de datos (Data Directory):** `/var/lib/mongodb`. Es la ruta física donde el motor de la base de datos (WiredTiger) almacena las colecciones, los índices y los metadatos. El acceso a esta carpeta está restringido exclusivamente al usuario `mongodb`.
 - **Directorio de logs:** `/var/log/mongodb/mongod.log`. Archivo donde se registran los eventos del motor, errores de arranque y conexiones entrantes, siendo el primer punto de revisión en caso de incidente.
 
-![image.png](image%2011.png)
+![image.png](Imagenes/image%2011.png)
 
 ### **1b.3 Auditoría de eventos y limitaciones de la versión Community**
 
@@ -204,7 +204,7 @@ A la hora de configurar la auditoría de eventos para registrar la actividad de 
 
 A nivel práctico para este entorno Community, hemos optado por habilitar el **Database Profiler** a nivel 2 (registrar absolutamente todas las operaciones) en una base de datos específica para demostrar la viabilidad del rastreo de consultas, a sabiendas de sus limitaciones en un entorno de producción.
 
-![image.png](image%2012.png)
+![image.png](Imagenes/image%2012.png)
 
 ```bash
 > db.system.profile.find().pretty()
@@ -298,11 +298,11 @@ security:
 
 1. **Reinicio y verificación:** Tras reiniciar el servicio de MongoDB (`sudo systemctl restart mongod`), el motor rechaza cualquier comando anónimo. A continuación se demuestra cómo el sistema bloquea una consulta de usuarios si no hay un *login* previo, y cómo la permite una vez nos autenticamos correctamente con la cuenta administradora:
 
-![image.png](903a8f96-eaa5-43c0-98e6-317c4d981209.png)
+![image.png](Imagenes/903a8f96-eaa5-43c0-98e6-317c4d981209.png)
 
-![image.png](image%2013.png)
+![image.png](Imagenes/image%2013.png)
 
-![image.png](image%2014.png)
+![image.png](Imagenes/image%2014.png)
 
 ### **1b.5 Habilitación de la autenticación SCRAM y su importancia en ciberseguridad**
 
@@ -318,7 +318,7 @@ Por tanto, la utilización de SCRAM es crítica por tres motivos fundamentales e
 
 Para verificar y confirmar la habilitación de estos mecanismos a nivel global en el servidor, hemos ejecutado una consulta de parámetros administrativos, comprobando que SCRAM es el motor de autenticación principal exigido por la base de datos:
 
-![Como se observa en la evidencia superior, el intento inicial de listar los parámetros del servidor devuelve un error de autorización (`Unauthorized`). Esto ocurre porque el rol asignado previamente (`userAdminAnyDatabase`) está diseñado bajo el principio de mínimo privilegio exclusivamente para la gestión de cuentas, no para la auditoría de configuración global del motor. Para superar esta restricción técnica, se ha realizado una escalada de privilegios concediendo el rol global `root` al usuario actual. Tras aplicar este cambio, la consulta finaliza con éxito y confirma que los mecanismos `SCRAM-SHA-1` y `SCRAM-SHA-256` están activos en el servidor.](image%2015.png)
+![Como se observa en la evidencia superior, el intento inicial de listar los parámetros del servidor devuelve un error de autorización (`Unauthorized`). Esto ocurre porque el rol asignado previamente (`userAdminAnyDatabase`) está diseñado bajo el principio de mínimo privilegio exclusivamente para la gestión de cuentas, no para la auditoría de configuración global del motor. Para superar esta restricción técnica, se ha realizado una escalada de privilegios concediendo el rol global `root` al usuario actual. Tras aplicar este cambio, la consulta finaliza con éxito y confirma que los mecanismos `SCRAM-SHA-1` y `SCRAM-SHA-256` están activos en el servidor.](Imagenes/image%2015.png)
 
 Como se observa en la evidencia superior, el intento inicial de listar los parámetros del servidor devuelve un error de autorización (`Unauthorized`). Esto ocurre porque el rol asignado previamente (`userAdminAnyDatabase`) está diseñado bajo el principio de mínimo privilegio exclusivamente para la gestión de cuentas, no para la auditoría de configuración global del motor. Para superar esta restricción técnica, se ha realizado una escalada de privilegios concediendo el rol global `root` al usuario actual. Tras aplicar este cambio, la consulta finaliza con éxito y confirma que los mecanismos `SCRAM-SHA-1` y `SCRAM-SHA-256` están activos en el servidor.
 
@@ -340,13 +340,13 @@ Para proteger la superficie de red del motor NoSQL, hemos modificado la configur
 1. **Restricción de IPs permitidas (`bindIp`):** Hemos modificado la directiva `bindIp` para que el servicio no escuche peticiones abiertas, sino que únicamente acepte conexiones desde la interfaz local (`127.0.0.1`) y una dirección IP de confianza de la red de administración (`192.168.1.100`).
 2. **Cambio de puerto por defecto:** Se ha sustituido el puerto estándar de MongoDB (`27017`) por un puerto personalizado (`37017`).
 
-![El cambio del puerto por defecto a `37017` actúa como una capa inicial de ofuscación para evadir escaneos masivos y bots en Internet, mientras que la directiva `bindIp` restringe el acceso exclusivamente a la interfaz local (`127.0.0.1`) y al servidor backend autorizado (`192.168.1.100`), bloqueando a nivel de red cualquier otra conexión externa antes de llegar a solicitar credenciales.](image%2016.png)
+![El cambio del puerto por defecto a `37017` actúa como una capa inicial de ofuscación para evadir escaneos masivos y bots en Internet, mientras que la directiva `bindIp` restringe el acceso exclusivamente a la interfaz local (`127.0.0.1`) y al servidor backend autorizado (`192.168.1.100`), bloqueando a nivel de red cualquier otra conexión externa antes de llegar a solicitar credenciales.](Imagenes/image%2016.png)
 
 El cambio del puerto por defecto a `37017` actúa como una capa inicial de ofuscación para evadir escaneos masivos y bots en Internet, mientras que la directiva `bindIp` restringe el acceso exclusivamente a la interfaz local (`127.0.0.1`) y al servidor backend autorizado (`192.168.1.100`), bloqueando a nivel de red cualquier otra conexión externa antes de llegar a solicitar credenciales.
 
 **Importante:** El cambio de puerto es una técnica de seguridad por ofuscación. Su propósito es evitar los escaneos automatizados genéricos que buscan bases de datos expuestas en puertos conocidos. Sin embargo, no es una medida de seguridad real frente a un atacante dirigido. Por tanto, solo es efectivo si se combina con la restricción de `bindIp`, autenticación robusta y un firewall de sistema operativo.   
 
-![image.png](image%2017.png)
+![image.png](Imagenes/image%2017.png)
 
 ### **1b.8 Copias de seguridad automáticas y seguras en MongoDB**
 
@@ -377,7 +377,7 @@ tar -czf - $BACKUP_DIR | openssl enc -aes-256-cbc -salt -pass pass:ClaveBackupEx
 rm -rf $BACKUP_DIR
 ```
 
-![En la imagen superior se muestra la creación y ejecución del script automatizado `backup_mongo.sh`. Durante el primer lanzamiento, el proceso falla en la fase de cifrado devolviendo el error `No such file or directory`. Esto ocurre porque el script intenta guardar el volcado final en la ruta absoluta `/backups`, un directorio que aún no existía en el sistema de archivos del servidor. Para solucionarlo, se procede a crear la carpeta manualmente y se le asignan los permisos de propietario al usuario local (`chown samurai:samurai`), garantizando que el script pueda escribir en ella sin necesidad de utilizar privilegios de superusuario (`root`). Tras aplicar esta corrección, la segunda ejecución se completa con éxito, generando el archivo comprimido y cifrado (`.tar.gz.enc`) verificado al final con el comando `ls -lh`.](image%2018.png)
+![En la imagen superior se muestra la creación y ejecución del script automatizado `backup_mongo.sh`. Durante el primer lanzamiento, el proceso falla en la fase de cifrado devolviendo el error `No such file or directory`. Esto ocurre porque el script intenta guardar el volcado final en la ruta absoluta `/backups`, un directorio que aún no existía en el sistema de archivos del servidor. Para solucionarlo, se procede a crear la carpeta manualmente y se le asignan los permisos de propietario al usuario local (`chown samurai:samurai`), garantizando que el script pueda escribir en ella sin necesidad de utilizar privilegios de superusuario (`root`). Tras aplicar esta corrección, la segunda ejecución se completa con éxito, generando el archivo comprimido y cifrado (`.tar.gz.enc`) verificado al final con el comando `ls -lh`.](Imagenes/image%2018.png)
 
 En la imagen superior se muestra la creación y ejecución del script automatizado `backup_mongo.sh`. Durante el primer lanzamiento, el proceso falla en la fase de cifrado devolviendo el error `No such file or directory`. Esto ocurre porque el script intenta guardar el volcado final en la ruta absoluta `/backups`, un directorio que aún no existía en el sistema de archivos del servidor. Para solucionarlo, se procede a crear la carpeta manualmente y se le asignan los permisos de propietario al usuario local (`chown samurai:samurai`), garantizando que el script pueda escribir en ella sin necesidad de utilizar privilegios de superusuario (`root`). Tras aplicar esta corrección, la segunda ejecución se completa con éxito, generando el archivo comprimido y cifrado (`.tar.gz.enc`) verificado al final con el comando `ls -lh`.
 
@@ -391,7 +391,7 @@ MongoDB implementa un sistema de Control de Acceso Basado en Roles (RBAC) que pe
 
 A modo de demostración de esta granularidad, he configurado en la base de datos `admin` un rol personalizado hiper-restrictivo. Este rol únicamente permite realizar operaciones de lectura sobre la colección `pacientes` de la base de datos `clinica`, asignándolo posteriormente a una nueva cuenta de auditoría externa.
 
-![image.png](image%2019.png)
+![image.png](Imagenes/image%2019.png)
 
 ---
 
