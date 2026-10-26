@@ -66,7 +66,7 @@ Para esta práctica, he implementado este mecanismo siguiendo cuatro fases desde
 3. **Creación del usuario y vinculación:** Se ha creado el usuario `auditor` para acceso local y se le ha asignado el rol previamente creado.
 4. **Activación predeterminada:** Se ha configurado el rol como predeterminado para que el usuario herede los permisos de lectura automáticamente al iniciar sesión, aplicando los cambios finalmente con un volcado de privilegios (`FLUSH PRIVILEGES`).
 
-![image.png](image%203.png)
+![image.png](Imagenes/image%203.png)
 
 ### **1a.4 Forzar el cifrado de datos en tránsito**
 
