@@ -16,13 +16,13 @@ Durante la fase de normalización, he estandarizado los métodos HTTP y forzado 
 
 El análisis de los ritmos de tráfico revela una clara estacionalidad semanal, concentrando el mayor volumen de peticiones en los días laborables centrales en torno a las 14:00 horas (ver `heatmap_hora_dia.png`). Sin embargo, al aislar los errores, los códigos de cliente (4xx) y servidor (5xx) rompen esta tendencia natural y se agrupan en franjas de madrugada o durante eventos muy concentrados. El caso más extremo es el pico de más de 630 solicitudes registrado el 21 de marzo frente a una media habitual de 350 peticiones diarias. Este comportamiento temporal sugiere fuertemente la ejecución de campañas automatizadas programadas fuera de los horarios de máxima vigilancia.
 
-![**Figura 1.** Evolución de las peticiones diarias destacando la disrupción volumétrica del 21 de marzo (micro-DDoS).](/resultados/figuras/req_por_dia.png)
+![**Figura 1.** Evolución de las peticiones diarias destacando la disrupción volumétrica del 21 de marzo (micro-DDoS).](req_por_dia.png)
 
 **Figura 1.** Evolución de las peticiones diarias destacando la disrupción volumétrica del 21 de marzo (micro-DDoS).
 
 Al evaluar el impacto por infraestructura (ver `status_por_host.png`), el host `www.zenargo.es` concentra de manera abrumadora la mayor tasa de errores del ecosistema mediante una acumulación masiva de códigos 4xx. En el extremo opuesto, los endpoints dedicados a recursos estáticos como `cdn.kaluma.io` sirven el contenido con la máxima eficiencia, registrando el percentil 95 (p95) más bajo y estable. Esta optimización contrasta con la distribución general de los tiempos de respuesta, cuyo histograma (`histograma_response_time.png`) evidencia frecuencias de latencia elevadas que solo decaen superados los 400 milisegundos.
 
-![**Figura 2.** Mapa de calor (Día vs Hora) que evidencia la concentración del tráfico en horas centrales y anomalías de madrugada.](/resultados/figuras/heatmap_hora_dia.png)
+![**Figura 2.** Mapa de calor (Día vs Hora) que evidencia la concentración del tráfico en horas centrales y anomalías de madrugada.](heatmap_hora_dia.png)
 
 **Figura 2.** Mapa de calor (Día vs Hora) que evidencia la concentración del tráfico en horas centrales y anomalías de madrugada.
 
