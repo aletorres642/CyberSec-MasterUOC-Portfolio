@@ -342,6 +342,8 @@ La inteligencia recopilada sugería que la clave de descifrado correspondía a u
 python3 -c 'import itertools; open("dict_zip.txt", "w").write("\n".join("".join(p) for p in itertools.permutations("atorresa")))'
 ```
 
+> Versión del script como archivo: [`genera_diccionario.py`](genera_diccionario.py).
+
 Con el diccionario preparado, he lanzado un ataque de fuerza bruta contra el archivo utilizando `fcrackzip`. He empleado el parámetro `-D` para instruir a la herramienta el uso del diccionario externo que acabo de generar:
 
 ```bash
