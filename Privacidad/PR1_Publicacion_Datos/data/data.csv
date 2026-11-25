@@ -1,0 +1,101 @@
+ID,Name,Age,Zip Code,Gender,Occupation,Diagnosis,Cost
+1,James Smith,22,12345,Male,Student,Flu,540
+2,Mario Garcia,25,12347,Male,Engineer,Heart Disease,5100
+3,Robert Johnson,28,12348,Male,Student,Flu,620
+4,Maria Rodriguez,45,12455,Female,Teacher,Cancer,12200
+5,Mary Williams,48,12456,Female,Teacher,Cancer,13400
+6,James Brown,52,12459,Male,Manager,Heart Disease,8100
+7,Patricia Jones,61,12801,Female,Retired,Diabetes,2050
+8,Jennifer Garcia,63,12802,Female,Retired,Diabetes,2150
+9,Michael Miller,21,12344,Male,Student,Flu,490
+10,Linda Martinez,24,12349,Female,Engineer,Heart Disease,4800
+11,Elizabeth Davis,29,12341,Female,Engineer,Flu,700
+12,Barbara Rodriguez,42,12451,Female,Teacher,Cancer,11500
+13,William Martinez,47,12453,Male,Manager,Cancer,14000
+14,Richard Hernandez,55,12458,Male,Manager,Heart Disease,9200
+15,Joseph Lopez,60,12805,Male,Retired,Diabetes,1900
+16,Thomas Gonzalez,65,12809,Male,Retired,Diabetes,2300
+17,Charles Wilson,23,12346,Male,Student,Flu,550
+18,Christopher Anderson,26,12342,Male,Engineer,Heart Disease,5300
+19,Daniel Thomas,30,12340,Male,Student,Flu,610
+20,Matthew Taylor,44,12452,Male,Teacher,Cancer,12800
+21,Anthony Moore,49,12450,Male,Teacher,Cancer,13100
+22,Mark Jackson,51,12457,Male,Manager,Heart Disease,8800
+23,Donald Martin,62,12803,Male,Retired,Diabetes,2200
+24,Steven Lee,66,12804,Male,Retired,Diabetes,2450
+25,Paul Perez,20,12343,Male,Student,Flu,510
+26,Andrea Thompson,27,12349,Female,Engineer,Heart Disease,5000
+27,Joshua White,43,12454,Male,Teacher,Cancer,11900
+28,Kenneth Harris,50,12459,Male,Manager,Cancer,13700
+29,Kevin Sanchez,53,12456,Male,Manager,Heart Disease,8500
+30,Brian Clark,64,12808,Male,Retired,Diabetes,2100
+31,Emily Ramirez,22,12345,Female,Student,Flu,530
+32,Sarah Lewis,24,12347,Female,Engineer,Heart Disease,4900
+33,Anthony Robinson,31,12348,Male,Student,Flu,640
+34,Kevin Walker,46,12455,Male,Teacher,Cancer,12500
+35,Jessica Young,47,12456,Female,Teacher,Cancer,13200
+36,Jeff Allen,54,12459,Male,Manager,Heart Disease,8300
+37,Margaret King,62,12801,Female,Retired,Diabetes,2100
+38,Gary Wright,64,12802,Male,Retired,Diabetes,2250
+39,Stephen Scott,21,12344,Male,Student,Flu,480
+40,Erica Torres,23,12349,Female,Engineer,Heart Disease,4700
+41,Jacob Nguyen,30,12341,Male,Engineer,Flu,720
+42,Laura Hill,41,12451,Female,Teacher,Cancer,11200
+43,Scott Flores,48,12453,Male,Manager,Cancer,14500
+44,Rachel Green,56,12458,Female,Manager,Heart Disease,9400
+45,Gregory Adams,61,12805,Male,Retired,Diabetes,1950
+46,Joshua Nelson,67,12809,Male,Retired,Diabetes,2350
+47,Jerry Baker,24,12346,Male,Student,Flu,560
+48,Deborah Hall,25,12342,Female,Engineer,Heart Disease,5400
+49,Walter Rivera,32,12340,Male,Student,Flu,630
+50,Pamela Campbell,45,12452,Female,Teacher,Cancer,12900
+51,Peter Mitchell,50,12450,Male,Teacher,Cancer,13000
+52,Heather Carter,52,12457,Female,Manager,Heart Disease,8900
+53,Douglas Roberts,63,12803,Male,Retired,Diabetes,2250
+54,Helen Gomez,68,12804,Female,Retired,Diabetes,2450
+55,Carol Phillips,19,12343,Female,Student,Flu,520
+56,Arthur Evans,28,12349,Male,Engineer,Heart Disease,5100
+57,Ruby Turner,44,12454,Female,Teacher,Cancer,12000
+58,Joe Diaz,51,12459,Male,Manager,Cancer,13800
+59,Julia Parker,54,12456,Female,Manager,Heart Disease,8600
+60,Jack Cruz,65,12808,Male,Retired,Diabetes,2150
+61,Albert Edwards,23,12345,Male,Student,Flu,550
+62,Justin Collins,26,12347,Male,Engineer,Heart Disease,5200
+63,Teresa Reyes,33,12348,Female,Student,Flu,650
+64,Susan Stewart,47,12455,Female,Teacher,Cancer,12600
+65,Christian Morris,49,12456,Male,Teacher,Cancer,13300
+66,Alice Morales,56,12459,Female,Manager,Heart Disease,8400
+67,Jesse Murphy,64,12801,Male,Retired,Diabetes,2150
+68,Bonnie Cook,66,12802,Female,Retired,Diabetes,2300
+69,Beatrice Rogers,20,12344,Female,Student,Flu,500
+70,Bryan Morgan,22,12349,Male,Engineer,Heart Disease,4900
+71,Eugenia Peterson,31,12341,Female,Engineer,Flu,730
+72,Louis Cooper,40,12451,Male,Teacher,Cancer,11000
+73,Wanda Reed,49,12453,Female,Manager,Cancer,14200
+74,Alan Bailey,57,12458,Male,Manager,Heart Disease,9500
+75,Janet Bell,63,12805,Female,Retired,Diabetes,2000
+76,Noah Kelly,69,12809,Male,Retired,Diabetes,2400
+77,Barbara Howard,25,12346,Female,Student,Flu,570
+78,Dylan Ward,27,12342,Male,Engineer,Heart Disease,5500
+79,Nancy Cox,34,12340,Female,Student,Flu,660
+80,Lawrence Rivera,46,12452,Male,Teacher,Cancer,13000
+81,Phyllis Richardson,51,12450,Female,Teacher,Cancer,13200
+82,Johnny Miller,53,12457,Male,Manager,Heart Disease,9000
+83,Katherine Wood,64,12803,Female,Retired,Diabetes,2300
+84,Samuel Watson,70,12804,Male,Retired,Diabetes,2500
+85,Willie Brooks,18,12343,Male,Student,Flu,530
+86,Joanne Bennett,29,12349,Female,Engineer,Heart Disease,5200
+87,Kyle Gray,42,12454,Male,Teacher,Cancer,12100
+88,Elizabeth James,52,12459,Female,Manager,Cancer,13900
+89,Zachary Reyes,55,12456,Male,Manager,Heart Disease,8700
+90,Tina Cruz,66,12808,Female,Retired,Diabetes,2200
+91,Rose Hughes,24,12345,Female,Student,Flu,560
+92,Victoria Price,27,12347,Female,Engineer,Heart Disease,5300
+93,Christian Myers,35,12348,Male,Student,Flu,670
+94,Ethan Long,48,12455,Male,Teacher,Cancer,12700
+95,Grace Foster,50,12456,Female,Teacher,Cancer,13400
+96,Mason Sanders,57,12459,Male,Manager,Heart Disease,8500
+97,Lori Ross,65,12801,Female,Retired,Diabetes,2200
+98,Caleb Morales,67,12802,Male,Retired,Diabetes,2350
+99,Isaac Powell,22,12344,Male,Student,Flu,510
+100,Olivia Sullivan,21,12349,Female,Engineer,Heart Disease,4800
